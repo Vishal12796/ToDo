@@ -1,3 +1,10 @@
 {
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@root/*": ["src/*/index", "src/*"]
+    }
+  },
   "extends": "@react-native/typescript-config"
 }
