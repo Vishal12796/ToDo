@@ -45,6 +45,10 @@ export const useAddToDo = (props: AddToDoProps) => {
 
   const priorities: string[] = [Priority.High, Priority.Medium, Priority.Low];
 
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
   const handleSubmit = () => {
     if (!title.trim()) {
       showAlert(t('Please enter a title.'));
@@ -106,5 +110,6 @@ export const useAddToDo = (props: AddToDoProps) => {
     selectedCategory,
     setSelectedCategory,
     handleSubmit,
+    handleBackPress
   };
 };

@@ -1,5 +1,5 @@
 import { Colors } from '@root/res/color';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   moderateScale,
   moderateVerticalScale,
@@ -10,25 +10,38 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flex: 1,
+    marginVertical: moderateScale(6),
+    paddingHorizontal: moderateScale(16),
+  },
+  categoryContainer: {
+    // backgroundColor: Colors.primary,
+    // borderBottomRightRadius: moderateScale(40),
+  },
+  listContentStyle: {
+    // flexWrap: 'wrap',
+    // width: Dimensions.get('window').width,
     paddingHorizontal: moderateScale(16),
   },
   listCategories: {
-    marginVertical: moderateVerticalScale(12),
+    marginBottom: moderateVerticalScale(2),
   },
   listToDo: {
     marginTop: moderateVerticalScale(6),
   },
   btnContainer: {
     flexDirection: 'row',
-    gap: moderateScale(10),
+    gap: moderateScale(6),
   },
   btnAddToDo: {
     flex: 1,
   },
-  btnLogout:{
+  header: {
+    backgroundColor: Colors.primary,
+  },
+  btnLogout: {
     marginTop: moderateVerticalScale(6),
-    marginBottom: moderateVerticalScale(6)
+    marginBottom: moderateVerticalScale(6),
+    marginHorizontal: moderateScale(16),
   },
   txtTriger: {
     paddingVertical: moderateVerticalScale(14),

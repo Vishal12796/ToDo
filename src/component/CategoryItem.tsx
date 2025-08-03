@@ -1,6 +1,7 @@
-import React from 'react';
 import { Colors } from '@root/res/color';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Chip } from 'react-native-paper';
 import { moderateScale } from 'react-native-size-matters';
 
 type Props = {
@@ -11,31 +12,29 @@ type Props = {
 
 export const CategoryItem = (props: Props) => {
   return (
-    <TouchableOpacity
-      style={[styles.optionItem, props?.isSelected && styles.selectedOption]}
+    <Chip
+      mode={props?.isSelected ? 'outlined' : 'flat'}
+      style={[styles.optionItem, !props?.isSelected && styles.selectedOption]}
+      selected={props?.isSelected}
+      textStyle={[styles.opText, !props?.isSelected && styles.selectedText]}
       onPress={() => props?.onPress()}
     >
-      <Text
-        style={[styles.optionText, props?.isSelected && styles.selectedText]}
-      >
-        {props?.title}
-      </Text>
-    </TouchableOpacity>
+      {props?.title}
+    </Chip>
   );
 };
 
 const styles = StyleSheet.create({
   optionItem: {
-    paddingHorizontal: moderateScale(14),
-    paddingVertical: moderateScale(8),
     backgroundColor: Colors.white,
     borderRadius: moderateScale(20),
-    marginRight: moderateScale(10),
+    marginVertical: moderateScale(6),
+    marginEnd: moderateScale(6),
   },
   selectedOption: {
     backgroundColor: Colors.primary,
   },
-  optionText: {
+  opText: {
     color: Colors.black,
     fontWeight: '500',
   },

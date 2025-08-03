@@ -180,6 +180,6 @@ export const useDashboard = () => {
     completedList,
     handleMenuPress,
     handleSortOption,
-    handleLogout
+    handleLogout,
   };
 };

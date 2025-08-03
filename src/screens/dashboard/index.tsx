@@ -1,11 +1,13 @@
 import { Button } from '@root/component/Button';
 import { CategoryItem } from '@root/component/CategoryItem';
 import { EmptyView } from '@root/component/EmptyView';
+import Header from '@root/component/Header';
 import { MenuList, MenuOptionType, MenuView } from '@root/component/Menu';
+import { Screen } from '@root/component/Screen';
 import { Categories } from '@root/types/categories';
 import { ToDo } from '@root/types/todo';
 import React from 'react';
-import { FlatList, ListRenderItemInfo, SafeAreaView, View } from 'react-native';
+import { FlatList, ListRenderItemInfo, View } from 'react-native';
 import { styles } from './styles';
 import { TodoItem } from './TodoItem';
 import { useDashboard } from './useDashboard';
@@ -59,49 +61,49 @@ export const Dashboard = () => {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
-      <View style={styles.container}>
-        <View>
-          <FlatList
-            data={dashboard.categories}
-            style={styles.listCategories}
-            renderItem={categoryItem}
-            keyExtractor={item => item.type}
-            scrollEnabled={false}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-        <View style={styles.btnContainer}>
-          <Button
-            title={dashboard.t('Add To Do')}
-            onPress={dashboard.navigateToAddToDo}
-            style={styles.btnAddToDo}
-          />
-          <Button
-            title={dashboard.t('Completed Task')}
-            onPress={dashboard.navigateToCompletedTask}
-            style={styles.btnAddToDo}
-          />
-          <SortOptions />
-        </View>
-
+    <Screen>
+      <Header title={dashboard.t('Dashboard')}/>
+      <View style={styles.categoryContainer}>
         <FlatList
-          data={dashboard.filteredList}
-          style={styles.listToDo}
-          renderItem={todoItem}
-          extraData={dashboard.refreshList}
-          keyExtractor={item => `${item.id}`}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => <EmptyView />}
-        />
-
-        <Button
-          title={dashboard.t('Logout')}
-          onPress={dashboard.handleLogout}
-          style={styles.btnLogout}
+          data={dashboard.categories}
+          contentContainerStyle={styles.listContentStyle}
+          style={styles.listCategories}
+          renderItem={categoryItem}
+          keyExtractor={item => item.type}
+          horizontal
+          showsHorizontalScrollIndicator={false}
         />
       </View>
-    </SafeAreaView>
+
+      <View style={[styles.btnContainer, styles.container]}>
+        <Button
+          title={dashboard.t('Add To Do')}
+          onPress={dashboard.navigateToAddToDo}
+          style={styles.btnAddToDo}
+        />
+        <Button
+          title={dashboard.t('Completed Task')}
+          onPress={dashboard.navigateToCompletedTask}
+          style={styles.btnAddToDo}
+        />
+        <SortOptions />
+      </View>
+
+      <FlatList
+        data={dashboard.filteredList}
+        style={styles.listToDo}
+        renderItem={todoItem}
+        extraData={dashboard.refreshList}
+        keyExtractor={item => `${item.id}`}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => <EmptyView />}
+      />
+
+      <Button
+        title={dashboard.t('Logout')}
+        onPress={dashboard.handleLogout}
+        style={styles.btnLogout}
+      />
+    </Screen>
   );
 };

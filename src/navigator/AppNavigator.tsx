@@ -42,22 +42,22 @@ export const AppNavigator = () => {
       <Stack.Navigator initialRouteName={appNavigator.initialRouteName}>
         <Stack.Screen
           name={ScreenNames.Login}
-          options={{ title: appNavigator.t('Login') }}
+          options={{ title: appNavigator.t('Login'), headerShown: false }}
           component={Login}
         />
         <Stack.Screen
           name={ScreenNames.Dashboard}
-          options={{ title: appNavigator.t('Dashboard') }}
+          options={{ title: appNavigator.t('Dashboard'), headerShown: false  }}
           component={Dashboard}
         />
         <Stack.Screen
           name={ScreenNames.AddTodo}
-          options={{ title: appNavigator.t('Add To Do') }}
+          options={{ title: appNavigator.t('Add To Do'), headerShown: false  }}
           component={AddToDo}
         />
         <Stack.Screen
           name={ScreenNames.CompletedTask}
-          options={{ title: appNavigator.t('Completed Task') }}
+          options={{ title: appNavigator.t('Completed Task'), headerShown: false  }}
           component={CompletedTask}
         />
       </Stack.Navigator>

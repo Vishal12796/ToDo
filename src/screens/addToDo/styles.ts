@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    gap: moderateScale(10),
     marginBottom: moderateVerticalScale(8),
   },
   pickerWrapper: {

@@ -1,18 +1,15 @@
 import { Colors } from '@root/res/color';
 import React from 'react';
+import { Platform, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Button as PaperButton } from 'react-native-paper';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  ActivityIndicator,
-} from 'react-native';
-import { moderateScale, moderateVerticalScale } from 'react-native-size-matters';
+  moderateScale,
+  moderateVerticalScale,
+} from 'react-native-size-matters';
 
 interface Props {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   style?: ViewStyle;
   textStyle?: TextStyle;
   disabled?: boolean;
@@ -23,33 +20,33 @@ export const Button = (props: Props) => {
   const isDisabled = props.disabled || props.loading;
 
   return (
-    <TouchableOpacity
+    <PaperButton
       style={[styles.button, isDisabled && styles.disabled, props?.style]}
+      contentStyle={{
+        height: moderateVerticalScale(42),
+      }}
       onPress={props.onPress}
-      activeOpacity={0.8}
       disabled={isDisabled}
+      mode="contained"
+      loading={props.loading}
+      textColor={Colors.white}
+      labelStyle={styles.buttonText}
     >
-      {props.loading ? (
-        <ActivityIndicator color={Colors.white} />
-      ) : (
-        <Text style={[styles.buttonText, props?.textStyle]}>{props.title}</Text>
-      )}
-    </TouchableOpacity>
+      {props.title}
+    </PaperButton>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.secondary,
-    paddingVertical: moderateVerticalScale(14),
     borderRadius: moderateScale(10),
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   buttonText: {
     color: Colors.white,
     fontSize: 16,
     fontWeight: '600',
+    marginHorizontal: moderateScale(4)
   },
   disabled: {
     backgroundColor: '#aaa',

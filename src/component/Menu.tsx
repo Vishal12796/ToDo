@@ -1,6 +1,6 @@
 import { Colors } from '@root/res/color';
 import React from 'react';
-import { StyleSheet, Text, TextStyle, View } from 'react-native';
+import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
 import {
   Menu,
   MenuOption,
@@ -11,6 +11,7 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
+import { Button } from './Button';
 
 export enum MenuOptionType {
   MarkAsComplete = 'Mark as complete',
@@ -29,6 +30,7 @@ type Props = {
   menuOptions: MenuList[];
   title: string;
   triggerStyle?: TextStyle;
+  btnStyle?: ViewStyle;
 };
 
 export const MenuView = (props: Props) => {
@@ -40,9 +42,7 @@ export const MenuView = (props: Props) => {
     <View style={styles.container}>
       <Menu onSelect={handleOptionSelect}>
         <MenuTrigger>
-          <Text style={[styles.triggerText, props?.triggerStyle]}>
-            {props?.title}
-          </Text>
+          <Button title={props?.title} style={props?.btnStyle} />
         </MenuTrigger>
 
         <MenuOptions>
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   txtMenu: {
-    color: Colors.primary,
+    color: Colors.black,
   },
 });

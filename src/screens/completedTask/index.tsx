@@ -6,6 +6,9 @@ import { styles } from './styles';
 import { TodoItem } from '../dashboard/TodoItem';
 import { useCompletedTask } from './useCompletedTask';
 import { EmptyView } from '@root/component/EmptyView';
+import { Screen } from '@root/component/Screen';
+import Header from '@root/component/Header';
+import IconBtn from '@root/component/IconBtn';
 
 export const CompletedTask = () => {
   const completed = useCompletedTask();
@@ -15,7 +18,14 @@ export const CompletedTask = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen>
+      <Header
+        title={completed.t('Completed Task')}
+        showLeftAction
+        LeftActionComponent={() => {
+          return <IconBtn onPress={() => completed.handleBackPress()} />;
+        }}
+      />
       <FlatList
         data={completed.completedList}
         style={styles.listCompleted}
@@ -24,6 +34,6 @@ export const CompletedTask = () => {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => <EmptyView />}
       />
-    </View>
+    </Screen>
   );
 };

@@ -4,6 +4,7 @@ import { ToDo } from '@root/types/todo';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
+import { Chip, Surface } from 'react-native-paper';
 import {
   moderateScale,
   moderateVerticalScale,
@@ -37,25 +38,28 @@ export const TodoItem = (props: TodoItemProps) => {
         onSelect={(menuOption: MenuOptionType) =>
           props?.menuPress && props?.menuPress(props?.data?.id, menuOption)
         }
+        btnStyle={styles.btnStyle}
       />
     );
   };
 
   return (
-    <View style={styles.rootView}>
+    <Surface style={styles.rootView}>
       <View style={styles.titleContainer}>
         <Text style={styles.txtTitle}>{`${t('Title')}:${
           props?.data?.title || ''
         }`}</Text>
         <View style={styles.optionContainer}>
-          <View
+          <Chip
             style={[
               styles.priorityContainer,
               !props?.isShowOptions && { marginEnd: 0 },
             ]}
+            selected={false}
+            textStyle={styles.txtPriority}
           >
-            <Text style={styles.txtPriority}>{props?.data?.priority}</Text>
-          </View>
+            {props?.data?.priority}
+          </Chip>
           {props?.isShowOptions && <Options />}
         </View>
       </View>
@@ -65,16 +69,18 @@ export const TodoItem = (props: TodoItemProps) => {
       <Text style={styles.txtDescription}>{`${t('Description')}:${
         props?.data?.description || ''
       }`}</Text>
-    </View>
+    </Surface>
   );
 };
 
 const styles = StyleSheet.create({
   rootView: {
-    borderWidth: moderateScale(0.5),
     borderRadius: moderateScale(6),
+    marginTop: moderateScale(2),
     marginBottom: moderateVerticalScale(12),
     padding: moderateScale(8),
+    marginHorizontal: moderateScale(16),
+    backgroundColor: Colors.white
   },
   txtTitle: {
     fontSize: 16,
@@ -95,7 +101,6 @@ const styles = StyleSheet.create({
   },
   priorityContainer: {
     backgroundColor: Colors.secondary,
-    padding: moderateScale(8),
     borderRadius: moderateScale(10),
     marginEnd: moderateScale(8),
   },
@@ -103,4 +108,9 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 12,
   },
+  btnStyle:{
+    height: moderateVerticalScale(30),
+    justifyContent: 'center',
+    minWidth: moderateScale(30)
+  }
 });

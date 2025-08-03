@@ -1,9 +1,12 @@
 import { Picker } from '@react-native-picker/picker';
 import { Button } from '@root/component/Button';
 import { CategoryItem } from '@root/component/CategoryItem';
+import Header from '@root/component/Header';
+import IconBtn from '@root/component/IconBtn';
 import { InputText } from '@root/component/Input';
+import { Screen } from '@root/component/Screen';
 import React from 'react';
-import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { moderateVerticalScale } from 'react-native-size-matters';
 import { styles } from './styles';
 import { AddToDoProps, useAddToDo } from './useAddToDo';
@@ -22,18 +25,25 @@ export const AddToDo = (props: AddToDoProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
+    <Screen>
+      <Header
+        title={addToDo.t('Add To Do')}
+        showLeftAction
+        LeftActionComponent={() => {
+          return <IconBtn onPress={() => addToDo.handleBackPress()} />;
+        }}
+      />
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.label}>{addToDo.t('Title')}</Text>
         <InputText
           value={addToDo.title}
+          label={addToDo.t('Title')}
           onChangeText={addToDo.setTitle}
           placeholder={addToDo.t('Enter title')}
         />
 
-        <Text style={styles.label}>{addToDo.t('Description')}</Text>
         <InputText
           value={addToDo.description}
+          label={addToDo.t('Description')}
           onChangeText={addToDo.setDescription}
           placeholder={addToDo.t('Enter description')}
           multiline
@@ -66,6 +76,6 @@ export const AddToDo = (props: AddToDoProps) => {
           style={styles.submitButton}
         />
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   );
 };
