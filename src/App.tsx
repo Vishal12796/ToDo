@@ -1,21 +1,45 @@
-import React from 'react';
-import { AppNavigator } from './navigator/AppNavigator';
-import { MenuProvider } from 'react-native-popup-menu';
-import i18n from './language/ i18n';
-import { LogBox } from 'react-native';
+import React, { useMemo } from 'react';
+import { LogBox, StatusBar } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import { MenuProvider } from 'react-native-popup-menu';
+import { Provider, useSelector } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { AppNavigator } from './navigator/AppNavigator';
+import { persistor, RootState, store } from './redux/store';
+import { DarkTheme, LightTheme } from './res/color';
+import { ThemeMode } from './redux/slice/themeSlice';
 
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 
-function App() {
+const ThemeApp: React.FC = () => {
+  const theme = useSelector((state: RootState) => state.theme.themeMode);
+
+  const themeMode = useMemo(() => {
+    if (theme === 'light') {
+      return LightTheme;
+    } else {
+      return DarkTheme;
+    }
+  }, [theme]);
+
   return (
-    <PaperProvider>
-      <MenuProvider>
+    <MenuProvider>
+      <PaperProvider theme={themeMode}>
         <AppNavigator />
-      </MenuProvider>
-    </PaperProvider>
+      </PaperProvider>
+    </MenuProvider>
   );
-}
+};
+
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <ThemeApp />
+      </PersistGate>
+    </Provider>
+  );
+};
 
 export default App;

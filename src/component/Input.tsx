@@ -1,4 +1,4 @@
-import { Colors } from '@root/res/color';
+import { ThemeColors } from '@root/res/color';
 import React from 'react';
 import {
   KeyboardTypeOptions,
@@ -6,7 +6,7 @@ import {
   TextInputProps,
   ViewStyle,
 } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { TextInput, useTheme } from 'react-native-paper';
 import {
   moderateScale,
   moderateVerticalScale,
@@ -34,21 +34,27 @@ export const InputText = ({
   keyboardType,
   ...props
 }: TextInputProp) => {
+  const { colors } = useTheme<ThemeColors>();
+
   return (
     <TextInput
       value={value}
-      autoCapitalize='none'
+      autoCapitalize="none"
       allowFontScaling={false}
       onChangeText={onChangeText}
       placeholder={placeholder}
       placeholderTextColor={placeholderColor}
-      style={[styles.input, style]}
+      style={[
+        styles.input,
+        { backgroundColor: colors.secondaryContainer },
+        style,
+      ]}
       secureTextEntry={secureTextEntry}
       keyboardType={keyboardType}
       label={label}
       mode={'outlined'}
-      outlineColor={Colors.borderColor}
-      activeOutlineColor={Colors.primary}
+      outlineColor={colors.borderColor}
+      activeOutlineColor={colors.activeBorder}
       outlineStyle={styles.outlineStyle}
       {...props}
     />
@@ -58,11 +64,10 @@ export const InputText = ({
 const styles = StyleSheet.create({
   input: {
     marginBottom: moderateVerticalScale(10),
-    backgroundColor: Colors.white,
     fontSize: 16,
   },
-  outlineStyle:{
+  outlineStyle: {
     borderRadius: moderateScale(10),
     borderWidth: moderateScale(2),
-  }
+  },
 });

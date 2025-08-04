@@ -1,3 +1,6 @@
+import { ThemeMode } from '@root/redux/slice/themeSlice';
+import { RootState } from '@root/redux/store';
+import { ThemeColors } from '@root/res/color';
 import React from 'react';
 import {
   GestureResponderEvent,
@@ -8,10 +11,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
+import { useSelector } from 'react-redux';
 
 type HeaderProps = {
   title: string;
@@ -28,9 +33,14 @@ const Header: React.FC<HeaderProps> = ({
   LeftActionComponent,
   style,
 }: HeaderProps) => {
+  const { colors } = useTheme<ThemeColors>();
+  const theme = useSelector((state: RootState) => state.theme.themeMode);
+
   return (
     <View style={style}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar
+        barStyle={theme == ThemeMode.light ? 'dark-content' : 'light-content'}
+      />
       <View style={styles.container}>
         <View style={styles.left}>
           {showLeftAction && LeftActionComponent ? (
@@ -46,7 +56,10 @@ const Header: React.FC<HeaderProps> = ({
         </View>
 
         <View style={styles.center}>
-          <Text style={styles.title} numberOfLines={1}>
+          <Text
+            style={[styles.title, { color: colors.secondaryText }]}
+            numberOfLines={1}
+          >
             {title}
           </Text>
         </View>

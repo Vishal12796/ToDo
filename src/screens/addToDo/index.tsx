@@ -10,9 +10,12 @@ import { ScrollView, Text, View } from 'react-native';
 import { moderateVerticalScale } from 'react-native-size-matters';
 import { styles } from './styles';
 import { AddToDoProps, useAddToDo } from './useAddToDo';
+import { useTheme } from 'react-native-paper';
+import { ThemeColors } from '@root/res/color';
 
 export const AddToDo = (props: AddToDoProps) => {
   const addToDo = useAddToDo(props);
+  const { colors } = useTheme<ThemeColors>();
 
   const renderPriorityItem = (level: string) => {
     return (
@@ -30,7 +33,7 @@ export const AddToDo = (props: AddToDoProps) => {
         title={addToDo.t('Add To Do')}
         showLeftAction
         LeftActionComponent={() => {
-          return <IconBtn onPress={() => addToDo.handleBackPress()} />;
+          return <IconBtn color={colors.iconColor}  onPress={() => addToDo.handleBackPress()} />;
         }}
       />
       <ScrollView contentContainerStyle={styles.container}>
@@ -50,12 +53,12 @@ export const AddToDo = (props: AddToDoProps) => {
           style={{ height: moderateVerticalScale(100) }}
         />
 
-        <Text style={styles.label}>{addToDo.t('Priority')}</Text>
+        <Text style={[styles.label, { color: colors.secondaryText}]}>{addToDo.t('Priority')}</Text>
         <View style={styles.row}>
           {addToDo.priorities.map(renderPriorityItem)}
         </View>
 
-        <Text style={styles.label}>{addToDo.t('Category')}</Text>
+        <Text style={[styles.label, { color: colors.secondaryText}]}>{addToDo.t('Category')}</Text>
         <View style={styles.pickerWrapper}>
           <Picker
             selectedValue={addToDo.selectedCategory}

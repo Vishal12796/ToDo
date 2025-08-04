@@ -4,16 +4,19 @@ import { EmptyView } from '@root/component/EmptyView';
 import Header from '@root/component/Header';
 import { MenuList, MenuOptionType, MenuView } from '@root/component/Menu';
 import { Screen } from '@root/component/Screen';
+import { ThemeColors } from '@root/res/color';
 import { Categories } from '@root/types/categories';
 import { ToDo } from '@root/types/todo';
 import React from 'react';
 import { FlatList, ListRenderItemInfo, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { styles } from './styles';
 import { TodoItem } from './TodoItem';
 import { useDashboard } from './useDashboard';
 
 export const Dashboard = () => {
   const dashboard = useDashboard();
+  const { colors } = useTheme<ThemeColors>();
 
   const menuOptions: MenuList[] = [
     {
@@ -31,7 +34,10 @@ export const Dashboard = () => {
       <MenuView
         menuOptions={menuOptions}
         title={dashboard.t('Sort')}
-        triggerStyle={styles.txtTriger}
+        triggerStyle={[
+          styles.txtTriger,
+          { backgroundColor: colors.primary, color: colors.primatyText },
+        ]}
         onSelect={(value: MenuOptionType) => dashboard?.handleSortOption(value)}
       />
     );
@@ -62,7 +68,7 @@ export const Dashboard = () => {
 
   return (
     <Screen>
-      <Header title={dashboard.t('Dashboard')}/>
+      <Header title={dashboard.t('Dashboard')} />
       <View style={styles.categoryContainer}>
         <FlatList
           data={dashboard.categories}
@@ -99,6 +105,11 @@ export const Dashboard = () => {
         ListEmptyComponent={() => <EmptyView />}
       />
 
+      <Button
+        title={dashboard.t('Theme')}
+        onPress={dashboard.handleTheme}
+        style={styles.btnLogout}
+      />
       <Button
         title={dashboard.t('Logout')}
         onPress={dashboard.handleLogout}

@@ -29,7 +29,7 @@ type Props = {
   onSelect: (value: MenuOptionType) => void;
   menuOptions: MenuList[];
   title: string;
-  triggerStyle?: TextStyle;
+  triggerStyle?: TextStyle | TextStyle[];
   btnStyle?: ViewStyle;
 };
 

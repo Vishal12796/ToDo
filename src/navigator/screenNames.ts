@@ -3,4 +3,5 @@ export const ScreenNames = {
   Dashboard: 'Dashboard',
   AddTodo: 'AddTodo',
   CompletedTask: 'CompletedTask',
+  Theme: 'Theme'
 } as const;

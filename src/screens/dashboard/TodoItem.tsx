@@ -1,10 +1,10 @@
 import { MenuList, MenuOptionType, MenuView } from '@root/component/Menu';
-import { Colors } from '@root/res/color';
+import { Colors, ThemeColors } from '@root/res/color';
 import { ToDo } from '@root/types/todo';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
-import { Chip, Surface } from 'react-native-paper';
+import { Chip, Surface, useTheme } from 'react-native-paper';
 import {
   moderateScale,
   moderateVerticalScale,
@@ -18,6 +18,7 @@ type TodoItemProps = {
 
 export const TodoItem = (props: TodoItemProps) => {
   const { t } = useTranslation();
+  const { colors } = useTheme<ThemeColors>();
 
   const menuOptions: MenuList[] = [
     {
@@ -44,11 +45,13 @@ export const TodoItem = (props: TodoItemProps) => {
   };
 
   return (
-    <Surface style={styles.rootView}>
+    <Surface
+      style={[styles.rootView, { backgroundColor: colors.secondaryContainer }]}
+    >
       <View style={styles.titleContainer}>
-        <Text style={styles.txtTitle}>{`${t('Title')}:${
-          props?.data?.title || ''
-        }`}</Text>
+        <Text style={[styles.txtTitle, { color: colors.secondaryText }]}>{`${t(
+          'Title',
+        )}:${props?.data?.title || ''}`}</Text>
         <View style={styles.optionContainer}>
           <Chip
             style={[
@@ -63,12 +66,12 @@ export const TodoItem = (props: TodoItemProps) => {
           {props?.isShowOptions && <Options />}
         </View>
       </View>
-      <Text style={styles.txtDescription}>{`${t('Category')}:${
-        props?.data?.category || ''
-      }`}</Text>
-      <Text style={styles.txtDescription}>{`${t('Description')}:${
-        props?.data?.description || ''
-      }`}</Text>
+      <Text
+        style={[styles.txtDescription, { color: colors.secondaryText }]}
+      >{`${t('Category')}:${props?.data?.category || ''}`}</Text>
+      <Text
+        style={[styles.txtDescription, { color: colors.secondaryText }]}
+      >{`${t('Description')}:${props?.data?.description || ''}`}</Text>
     </Surface>
   );
 };
@@ -80,16 +83,13 @@ const styles = StyleSheet.create({
     marginBottom: moderateVerticalScale(12),
     padding: moderateScale(8),
     marginHorizontal: moderateScale(16),
-    backgroundColor: Colors.white
   },
   txtTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.black,
   },
   txtDescription: {
     fontSize: 14,
-    color: Colors.black,
   },
   titleContainer: {
     flexDirection: 'row',
@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 12,
   },
-  btnStyle:{
+  btnStyle: {
     height: moderateVerticalScale(30),
     justifyContent: 'center',
-    minWidth: moderateScale(30)
-  }
+    minWidth: moderateScale(30),
+  },
 });

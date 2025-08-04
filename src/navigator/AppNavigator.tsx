@@ -11,6 +11,7 @@ import React from 'react';
 import { ScreenNames } from './ScreenNames';
 import { useAppNavigator } from './useAppNavigator';
 import { StatusBar } from 'react-native';
+import { Theme } from '@root/screens/theme';
 
 export type RootStackParamList = {
   Dashboard: undefined;
@@ -19,6 +20,7 @@ export type RootStackParamList = {
     addData: (data: ToDo) => void;
   };
   CompletedTask: undefined;
+  Theme: undefined
 };
 
 export type CommonScreenPropsType = {
@@ -36,29 +38,36 @@ export const AppNavigator = () => {
     return null;
   }
 
+  const options = { headerShown: false };
+
   return (
     <NavigationContainer>
-      <StatusBar barStyle={'dark-content'}/>
+      <StatusBar barStyle={'dark-content'} />
       <Stack.Navigator initialRouteName={appNavigator.initialRouteName}>
         <Stack.Screen
           name={ScreenNames.Login}
-          options={{ title: appNavigator.t('Login'), headerShown: false }}
+          options={options}
           component={Login}
         />
         <Stack.Screen
           name={ScreenNames.Dashboard}
-          options={{ title: appNavigator.t('Dashboard'), headerShown: false  }}
+          options={options}
           component={Dashboard}
         />
         <Stack.Screen
           name={ScreenNames.AddTodo}
-          options={{ title: appNavigator.t('Add To Do'), headerShown: false  }}
+          options={options}
           component={AddToDo}
         />
         <Stack.Screen
           name={ScreenNames.CompletedTask}
-          options={{ title: appNavigator.t('Completed Task'), headerShown: false  }}
+          options={options}
           component={CompletedTask}
+        />
+        <Stack.Screen
+          name={ScreenNames.Theme}
+          options={options}
+          component={Theme}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,5 +1,4 @@
-import { Colors } from '@root/res/color';
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   moderateScale,
   moderateVerticalScale,
@@ -35,9 +34,6 @@ export const styles = StyleSheet.create({
   btnAddToDo: {
     flex: 1,
   },
-  header: {
-    backgroundColor: Colors.primary,
-  },
   btnLogout: {
     marginTop: moderateVerticalScale(6),
     marginBottom: moderateVerticalScale(6),
@@ -45,9 +41,7 @@ export const styles = StyleSheet.create({
   },
   txtTriger: {
     paddingVertical: moderateVerticalScale(14),
-    color: Colors.white,
     fontSize: 16,
     fontWeight: '600',
-    backgroundColor: Colors.secondary,
   },
 });

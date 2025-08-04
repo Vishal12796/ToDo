@@ -103,6 +103,10 @@ export const useDashboard = () => {
     });
   };
 
+  const handleTheme = () => {
+    navigation.navigate(ScreenNames.Theme);
+  };
+
   const findTodoItemIndex = (id: number) => {
     const findIndex = todoList.findIndex(item => item.id === id);
     return findIndex;
@@ -181,5 +185,6 @@ export const useDashboard = () => {
     handleMenuPress,
     handleSortOption,
     handleLogout,
+    handleTheme
   };
 };

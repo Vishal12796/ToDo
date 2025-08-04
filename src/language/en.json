@@ -29,6 +29,11 @@
     "High -> Low": "High -> Low",
     "Low -> High": "Low -> High",
     "Username is required": "Username is required",
-    "Password is required": "Password is required"
+    "Password is required": "Password is required",
+    "Theme": "Theme",
+    "Choose Theme:": "Choose Theme:",
+    "Light": "Light",
+    "Dark": "Dark",
+    "System Based": "System Based"
   }
 }
