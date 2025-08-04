@@ -1,5 +1,4 @@
-import { ThemeMode } from '@root/redux/slice/themeSlice';
-import { RootState } from '@root/redux/store';
+import { useAppTheme } from '@root/hooks/useAppTheme';
 import { ThemeColors } from '@root/res/color';
 import React from 'react';
 import {
@@ -16,7 +15,6 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
 
 type HeaderProps = {
   title: string;
@@ -34,13 +32,11 @@ const Header: React.FC<HeaderProps> = ({
   style,
 }: HeaderProps) => {
   const { colors } = useTheme<ThemeColors>();
-  const theme = useSelector((state: RootState) => state.theme.themeMode);
+  const appTheme = useAppTheme();
 
   return (
     <View style={style}>
-      <StatusBar
-        barStyle={theme == ThemeMode.light ? 'dark-content' : 'light-content'}
-      />
+      <StatusBar barStyle={appTheme.barStyle} />
       <View style={styles.container}>
         <View style={styles.left}>
           {showLeftAction && LeftActionComponent ? (
