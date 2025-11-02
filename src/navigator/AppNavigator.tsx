@@ -5,13 +5,13 @@ import { AddToDo } from '@root/screens/addToDo';
 import { CompletedTask } from '@root/screens/completedTask';
 import { Dashboard } from '@root/screens/dashboard';
 import { Login } from '@root/screens/login';
+import { Theme } from '@root/screens/theme';
 import { ToDo } from '@root/types/todo';
 import { NativeStackNavigationHelpers } from 'node_modules/@react-navigation/native-stack/lib/typescript/src/types';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { ScreenNames } from './ScreenNames';
 import { useAppNavigator } from './useAppNavigator';
-import { StatusBar } from 'react-native';
-import { Theme } from '@root/screens/theme';
 
 export type RootStackParamList = {
   Dashboard: undefined;
@@ -20,7 +20,7 @@ export type RootStackParamList = {
     addData: (data: ToDo) => void;
   };
   CompletedTask: undefined;
-  Theme: undefined
+  Theme: undefined;
 };
 
 export type CommonScreenPropsType = {

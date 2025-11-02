@@ -1,14 +1,19 @@
+import { ThemeColors } from '@root/res/color';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { moderateVerticalScale } from 'react-native-size-matters';
 
 export const EmptyView = () => {
   const { t } = useTranslation();
+  const { colors } = useTheme<ThemeColors>();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.txtNoData}>{t('No data found')}</Text>
+      <Text style={[styles.txtNoData, { color: colors.secondaryText }]}>
+        {t('No data found')}
+      </Text>
     </View>
   );
 };
